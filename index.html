@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TypeScript Assignment 1</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f4f6f8;
+        color: #333;
+      }
+
+      h1 {
+        color: #1e3a5f;
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        margin: 25px 0;
+        flex-wrap: wrap;
+      }
+
+      button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+        font-size: 15px;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      #output {
+        background: #17202a;
+        color: #e5e7eb;
+        padding: 20px;
+        border-radius: 8px;
+        min-height: 250px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-family: Consolas, monospace;
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>TypeScript Assignment 1</h1>
+
+    <p>
+      Select an option below to view the output of the TypeScript exercises.
+    </p>
+
+    <div class="controls">
+      <button onclick="loadExercise('practice')">Practice Examples</button>
+
+      <button onclick="loadExercise('solutions')">Final Solutions</button>
+    </div>
+
+    <h2 id="output-title">Program Output</h2>
+
+    <pre id="output">Select an option to display the program output.</pre>
+
+    <script>
+      const output = document.getElementById("output");
+      const outputTitle = document.getElementById("output-title");
+
+      const originalLog = console.log;
+
+      console.log = (...args) => {
+        originalLog(...args);
+
+        const formatted = args
+          .map((value) => {
+            if (typeof value === "object" && value !== null) {
+              return JSON.stringify(value, null, 2);
+            }
+
+            return String(value);
+          })
+          .join(" ");
+
+        output.textContent += formatted + "\n";
+      };
+
+      async function loadExercise(type) {
+        output.textContent = "";
+        outputTitle.textContent =
+          type === "practice" ? "Practice Output" : "Final Solutions Output";
+
+        try {
+          await import(`./dist/${type}.js?run=${Date.now()}`);
+
+          if (!output.textContent.trim()) {
+            output.textContent =
+              "The program ran successfully but produced no console output.";
+          }
+        } catch (error) {
+          output.textContent = "Error: " + error.message;
+          console.error(error);
+        }
+      }
+
+      console.log = console.log.bind(console);
+    </script>
+  </body>
+</html>

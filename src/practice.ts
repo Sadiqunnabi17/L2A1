@@ -12,6 +12,8 @@ function multiplyValue(value: number, multiplier: number = 2): number {
   return value * multiplier;
 }
 
+console.log("\n========== Problem 1: Multiply Value ==========");
+
 console.log(multiplyValue(15)); // Output: 30
 console.log(multiplyValue(30, 3)); // Output: 90
 console.log(multiplyValue(25, 0)); // Output: 0
@@ -48,11 +50,15 @@ function processInput(input: string | number | boolean): string | number {
   }
 }
 
+console.log(
+  "\n========== Problem 2: Union Types and Type Narrowing ==========",
+);
+
 // Let's test the function
-console.log(processInput("TypeScript")); // Output: "TYPESCRIPT"
-console.log(processInput(8)); // Output: 80
-console.log(processInput(false)); // Output: "Inactive"
+console.log(processInput("hello")); // Output: "HELLOW"
+console.log(processInput(5)); // Output: 50
 console.log(processInput(true)); // Output: "Active"
+console.log(processInput(false)); // Output: "Inactive"
 
 // =============
 // Problem 3: Readonly Tuples in TypeScript
@@ -77,12 +83,14 @@ function formatCoordinate(
   return `Location: ${locationName} (Latitude: ${latitude}, Longitude: ${longitude})`;
 }
 
-// Test the function
-console.log(formatCoordinate([24.89, 91.87, "Sylhet"]));
-// Output: Location: Sylhet (Latitude: 24.89, Longitude: 91.87)
+console.log("\n========== Problem 3: Readonly Tuples ==========");
 
-console.log(formatCoordinate([24.37, 88.6, "Rajshahi"]));
-// Output: Location: Rajshahi (Latitude: 24.37, Longitude: 88.6)
+// Test the function
+console.log(formatCoordinate([23.81, 90.41, "Dhaka"]));
+// Output: Location: Dhaka (Latitude: 23.81, Longitude: 90.41)
+
+console.log(formatCoordinate([22.35, 91.78, "Chittagong"]));
+// Output: Location: Chittagong (Latitude: 22.35, Longitude: 91.78)
 
 // ============
 // Problem 4: Generics and Rest Parameters in TypeScript
@@ -99,19 +107,21 @@ function concatenateArrays<T>(...arrays: T[][]): T[] {
   return arrays.flat();
 }
 
+console.log("\n========== Problem 4: Generics and Rest Parameters ==========");
+
 // Test the function with strings
-console.log(concatenateArrays(["red", "blue"], ["green", "yellow"]));
-// Output: ["red", "blue", "green", "yellow"]
+console.log(concatenateArrays(["a", "b"], ["c", "d"]));
+// Output: ["a", "b", "c", "d"]
 
 // Test the function with numbers
-console.log(concatenateArrays([10, 20], [30, 40], [50]));
-// Output: [10, 20, 30, 40, 50]
+console.log(concatenateArrays([1, 2], [3, 4], [5]));
+// Output: [1, 2, 3, 4, 5]
 
 // ============
 // Problem 5: Interfaces and Array Filtering in TypeScript
 // Create a function `getPopularCourses` that accepts an array of `Course` objects
 // and a `minStudents` number. The function should return a new array containing
-// only the courses where `isPublished` is true and `students` is greater than or equal to `minStudents`.
+// only the courses where `isActive` is true and `students` is greater than or equal to `minStudents`.
 
 // Definitions:
 // Interface: An interface defines the structure of an object by specifying its required properties and their data types.
@@ -121,7 +131,7 @@ console.log(concatenateArrays([10, 20], [30, 40], [50]));
 interface Course {
   title: string;
   students: number;
-  isPublished: boolean;
+  isActive: boolean;
 }
 
 // Create a function to filter popular courses
@@ -130,17 +140,21 @@ function getPopularCourses(courses: Course[], minStudents: number): Course[] {
   // that satisfy both conditions
 
   return courses.filter(
-    (course) => course.isPublished === true && course.students >= minStudents,
+    (course) => course.isActive === true && course.students >= minStudents,
   );
 }
 
 // Sample input
 const courses: Course[] = [
-  { title: "React Basics", students: 95, isPublished: true },
-  { title: "Draft Node.js", students: 150, isPublished: false },
-  { title: "JavaScript Essentials", students: 65, isPublished: true },
-  { title: "Python Fundamentals", students: 110, isPublished: true },
+  { title: "TypeScript Mastery", students: 120, isActive: true },
+  { title: "Draft Course", students: 200, isActive: false },
+  { title: "Basic HTML", students: 45, isActive: true },
+  { title: "Next.js Pro", students: 85, isActive: true },
 ];
+
+console.log(
+  "\n========== Problem 5: Interfaces and Array Filtering ==========",
+);
 
 // Test the function
 console.log(getPopularCourses(courses, 80));
@@ -160,22 +174,32 @@ function pluckValues<T, K extends keyof T>(items: T[], key: K): T[K][] {
   return items.map((item) => item[key]);
 }
 
+interface User {
+  id: number;
+  name: string;
+  role: string;
+}
+
 // Sample input
-const users = [
-  { id: 11, name: "Nadia", role: "Developer" },
-  { id: 12, name: "Arif", role: "Designer" },
-  { id: 13, name: "Mehedi", role: "Tester" },
+const users: User[] = [
+  { id: 1, name: "Rakib", role: "Admin" },
+  { id: 2, name: "Sadia", role: "Editor" },
+  { id: 3, name: "Tariq", role: "Subscriber" },
 ];
+
+console.log(
+  "\n========== Problem 6: Generics, keyof and Indexed Access Types ==========",
+);
 
 // Test the function
 console.log(pluckValues(users, "name"));
-// Output: ["Nadia", "Arif", "Mehedi"]
+// Output: ["Rakib", "Sadia", "Tariq"]
 
 console.log(pluckValues(users, "id"));
-// Output: [11, 12, 13]
+// Output: [1, 2, 3]
 
 console.log(pluckValues(users, "role"));
-// Output: ["Developer", "Designer", "Tester"]
+// Output: ["Admin", "Editor", "Subscriber"]
 
 // ===========
 // Problem 7: Classes, Inheritance and Access Modifiers in TypeScript
@@ -185,8 +209,10 @@ console.log(pluckValues(users, "role"));
 // Definitions:
 // Class: A class is a blueprint or template for creating objects. It defines the properties
 // and methods that its objects will have.
+//
 // Constructor: A constructor is a special method that runs automatically when we create an
 // object from a class.
+//
 // Inheritance: Inheritance is a mechanism that allows a class to inherit properties and methods
 // from another class. The class that inherits is called the subclass or derived class, and the
 // class being inherited from is called the superclass or base class.
@@ -224,8 +250,12 @@ class Manager extends Employee {
   }
 }
 
+console.log(
+  "\n========== Problem 7: Classes, Inheritance and Access Modifiers ==========",
+);
+
 // Create a Manager object
-const manager = new Manager("Robert", 65000, "Finance");
+const manager = new Manager("Alice", 50000, "Engineering");
 
 // Test the methods
 console.log(manager.getDetails());
@@ -259,12 +289,16 @@ function validateAgeAsync(age: number): Promise<string> {
   });
 }
 
-// Test 1: Age is 25
-validateAgeAsync(25)
+console.log("\n========== Problem 8: Asynchronous Age Validation ==========");
+
+// Test 1: Age is 20
+validateAgeAsync(20)
   .then((result) => console.log(result))
   .catch((error) => console.log(error.message));
 
-// Test 2: Age is 16
-validateAgeAsync(16)
+// Test 2: Age is 15
+validateAgeAsync(15)
   .then((result) => console.log(result))
   .catch((error) => console.log(error.message));
+
+export {};
