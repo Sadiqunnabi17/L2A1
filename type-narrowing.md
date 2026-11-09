@@ -11,7 +11,7 @@ Type narrowing means checking a variable's actual type and allowing TypeScript t
 ```ts
 function processInput(input: string | number | boolean): string | number {
   if (typeof input === "string") {
-    return input.trim().toUpperCase();
+    return input.trim().toLowerCase();
   } else if (typeof input === "number") {
     return input * 10;
   } else {

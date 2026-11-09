@@ -103,7 +103,12 @@
           type === "practice" ? "Practice Output" : "Final Solutions Output";
 
         try {
-          await import(`./dist/${type}.js?run=${Date.now()}`);
+          const modulePath =
+            type === "practice"
+              ? `./dist/src/practice.js?run=${Date.now()}`
+              : `./dist/solutions-demo.js?run=${Date.now()}`;
+
+          await import(modulePath);
 
           if (!output.textContent.trim()) {
             output.textContent =

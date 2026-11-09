@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // File Layout
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
 
     // Environment Settings
@@ -17,7 +17,7 @@
   },
 
   // Files to compile
-  "include": ["src/**/*.ts"],
+  "include": ["solutions.ts", "solutions-demo.ts", "src/**/*.ts"],
 
   // Files and folders to exclude
   "exclude": ["node_modules", "dist"]
