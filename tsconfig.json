@@ -3,10 +3,22 @@
     // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
-    "module": "esnext",
-    "target": "esnext",
-    "types": [],
+
+    // Environment Settings
+    "target": "ES2020",
+    "module": "CommonJS",
+
+    // Type Checking
     "strict": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+
+    // JavaScript Output
+    "sourceMap": true
+  },
+
+  // Files to compile
+  "include": ["src/**/*.ts"],
+
+  // Files and folders to exclude
+  "exclude": ["node_modules", "dist", "src/scratch.ts"]
 }
