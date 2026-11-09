@@ -20,5 +20,5 @@
   "include": ["src/**/*.ts"],
 
   // Files and folders to exclude
-  "exclude": ["node_modules", "dist", "src/scratch.ts"]
+  "exclude": ["node_modules", "dist", "src/practice.ts"]
 }
